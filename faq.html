@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <title>{{faq.faq_scurry_help_center}}</title>
+</head>
+<body>
+  
+  <header class="site-header solid-nav">
+    <div class="container nav-row">
+      <a href="index.html" class="brand" aria-label="{{index.scurry_home}}">
+        <img src="images/logo.png" alt="{{index.scurry_logo}}">
+        <span>{{index.scurry}}</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">{{index.menu}}</button>
+      <nav id="site-nav" class="site-nav">
+        <a href="personal.html">{{index.personal}}</a>
+        <a href="business.html">{{index.business}}</a>
+        <a href="about.html">{{index.company}}</a>
+        <a href="team.html">{{index.team}}</a>
+        <a href="faq.html" class="active">{{index.faq}}</a>
+        <a href="coming-soon.html" class="nav-cta">{{index.join_waitlist}}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="faq-hero section-dark">
+      <div class="container center-stack reveal">
+        <p class="eyebrow accent">{{faq.help_center}}</p>
+        <h1>{{faq.frequently_asked_questions}}</h1>
+        <p class="section-intro">{{faq.everything_you_need_to_know_ab}}</p>
+        <label class="faq-search" for="faq-search">
+          <span>⌕</span>
+          <input id="faq-search" type="search" placeholder="{{faq.search_questions}}" autocomplete="off">
+        </label>
+      </div>
+    </section>
+
+    <nav class="faq-tabs" aria-label="{{faq.faq_sections}}">
+      <div class="container faq-tabs-row">
+        <a href="#about-scurry">{{index.about_scurry}}</a>
+        <a href="#products-features">{{faq.products_features}}</a>
+        <a href="#eligibility-access">{{faq.eligibility_access}}</a>
+        <a href="#safety-compliance">{{faq.safety_compliance}}</a>
+        <a href="#pricing-fees">{{faq.pricing_fees}}</a>
+        <a href="#app-launch">{{faq.app_launch}}</a>
+      </div>
+    </nav>
+
+    <section class="section section-white faq-page-section">
+      <div class="container faq-shell">
+        <div class="faq-note reveal">
+          <span>{{faq.i}}</span>
+          <p>{{faq.scurry_is_currently_in_pre_lau}}</p>
+        </div>
+
+        <section class="faq-group reveal" id="about-scurry" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">{{faq.i}}</span>
+            <h2>{{index.about_scurry}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.what_is_scurry}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_a_financial_technolo}}</p>
+              <p>{{faq.we_bridge_traditional_finance}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.what_problem_is_scurry_solving}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.traditional_banking_in_emergin}}</p>
+              <p>{{faq.scurry_addresses_these_systemi}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.who_is_behind_scurry}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_was_co_founded_by_eric}}</p>
+              <p>{{faq.learn_more_about_our_team_on_t}} <a href="team.html">{{index.team}}</a> {{faq.page}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.is_scurry_a_bank}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.no_scurry_is_a_fintech_company}}</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="faq-group reveal" id="products-features" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">▭</span>
+            <h2>{{faq.products_features}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.what_products_will_scurry_offe}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_s_initial_product_suite}}</p>
+              <ul>
+                <li><strong>{{faq.global_usd_accounts}}</strong> {{faq.hold_and_transact_in_u_s_dolla}}</li>
+                <li><strong>{{faq.stablecoin_backed_payment_card}}</strong> {{faq.spend_stablecoins_wherever_maj}}</li>
+                <li><strong>{{faq.credit_services}}</strong> {{faq.access_consumer_and_business_c}}</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.what_stablecoins_will_scurry_s}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_establishing_partner}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.will_scurry_offer_services_for}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.yes_scurry_is_designed_for_bot}} <a href="business.html">{{index.business}}</a> {{faq.page}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.what_role_does_ai_play_in_the}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_employs_a_sophisticated}}</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="faq-group reveal" id="eligibility-access" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">✓</span>
+            <h2>{{faq.eligibility_access}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.who_is_eligible_for_a_scurry_a}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_designed_to_serve_gl}}</p>
+              <p>{{faq.availability_will_be_subject_t}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.how_do_i_join_the_waitlist}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.you_can_sign_up_for_early_acce}} <a href="coming-soon.html">{{index.join_the_waitlist}}</a> {{faq.page_joining_the_waitlist_mean}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.do_i_need_a_u_s_address_or_ent}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.no_one_of_scurry_s_core_value}}</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="faq-group reveal" id="safety-compliance" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">◇</span>
+            <h2>{{faq.safety_compliance}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.is_scurry_regulated}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.yes_scurry_is_a_registered_mon}}</p>
+              <p>{{faq.financial_services_on_the_scur}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.are_my_funds_safe_with_scurry}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_not_yet_a_live_platf}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.what_is_scurry_s_privacy_polic}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_currently_finalizing}}</p>
+              <p>{{faq.we_are_committed_to_transparen}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.does_scurry_conduct_kyc_know_y}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.yes_as_a_registered_msb_and_in}}</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="faq-group reveal" id="pricing-fees" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">$</span>
+            <h2>{{faq.pricing_fees}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.how_much_does_scurry_cost}} <span class="faq-status">{{faq.coming_soon}}</span></summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_s_complete_fee_schedule}}</p>
+              <p>{{faq.our_commitment_is_to_offer_sig}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.will_there_be_fees_for_interna}} <span class="faq-status">{{faq.coming_soon}}</span></summary>
+            <div class="faq-answer">
+              <p>{{faq.we_are_building_scurry_specifi}}</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="faq-group reveal" id="app-launch" data-faq-group>
+          <div class="faq-group-heading">
+            <span class="faq-icon">⌁</span>
+            <h2>{{faq.app_launch_timeline}}</h2>
+          </div>
+
+          <details class="faq-item">
+            <summary>{{faq.when_will_the_scurry_app_be_av}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.the_scurry_app_is_currently_un}}</p>
+              <p><a href="coming-soon.html">{{index.join_the_waitlist}}</a> {{faq.to_be_among_the_first_to_know}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.what_is_a_pre_seed_round_and_h}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.a_pre_seed_round_is_an_early_s}}</p>
+              <p>{{faq.some_details_including_our_ful}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.which_markets_will_scurry_laun}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.scurry_is_prioritizing_mexico}}</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>{{faq.how_can_i_stay_updated_on_scur}}</summary>
+            <div class="faq-answer">
+              <p>{{faq.the_best_way_is_to}} <a href="coming-soon.html">{{faq.join_our_waitlist}}</a> {{faq.for_email_updates_you_can_also}} <a href="https://www.linkedin.com/company/scurry/" target="_blank">{{faq.linkedin}}</a> {{faq.for_announcements_team_updates}}</p>
+            </div>
+          </details>
+        </section>
+
+        <p class="faq-no-results" hidden>{{faq.no_matching_questions_found}}</p>
+      </div>
+    </section>
+
+    <section class="section section-light faq-cta-section">
+      <div class="container faq-cta reveal">
+        <p class="eyebrow accent">{{faq.still_have_questions}}</p>
+        <h2>{{faq.we_re_happy_to_hear_from_you}}</h2>
+        <p>{{faq.reach_out_and_we_ll_get_back_t}}</p>
+        <div class="center-actions">
+          <a href="coming-soon.html" class="btn btn-primary">{{index.join_the_waitlist}}</a>
+          <a href="https://www.linkedin.com/company/scurry/" target="_blank" class="btn btn-secondary">{{faq.follow_on_linkedin}}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand"><img src="images/logo.png" alt="{{index.scurry_logo}}"><span>{{index.scurry}}</span></a>
+        <p>{{index.stablecoin_stack_for_emerging}}</p>
+        <p class="role"><img height="20" src="images/LI.png" alt="{{index.linkedin_icon}}"><a href="https://www.linkedin.com/company/scurry" target="_blank">{{faq.linkedin}}</a></p>
+      </div>
+      <div>
+        <h4>{{index.explore}}</h4>
+        <a href="index.html">{{index.home}}</a>
+        <a href="personal.html">{{index.personal}}</a>
+        <a href="business.html">{{index.business}}</a>
+        <a href="team.html">{{index.team}}</a>
+      </div>
+      <div>
+        <h4>{{index.company}}</h4>
+        <a href="about.html">{{index.about_scurry}}</a>
+        <a href="faq.html">{{index.faq}}</a>
+        <a href="coming-soon.html">{{index.join_the_waitlist}}</a>
+      </div>
+    </div>
+    <div class="container disclosure-row">
+      <div class="disclosure-lite">{{index.scurry_is_a_financial_technolo}}</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

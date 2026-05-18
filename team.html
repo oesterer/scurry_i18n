@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <title>{{team.the_scurry_team_leadership}}</title>
+</head>
+<body>
+  
+  <header class="site-header solid-nav">
+    <div class="container nav-row">
+      <a href="index.html" class="brand" aria-label="{{index.scurry_home}}">
+        <img src="images/logo.png" alt="{{index.scurry_logo}}">
+        <span>{{index.scurry}}</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">{{index.menu}}</button>
+      <nav id="site-nav" class="site-nav">
+        <a href="personal.html">{{index.personal}}</a>
+        <a href="business.html">{{index.business}}</a>
+        <a href="about.html">{{index.company}}</a>
+        <a href="team.html" class="active">{{index.team}}</a>
+        <a href="faq.html">{{index.faq}}</a>
+        <a href="coming-soon.html" class="nav-cta">{{index.join_waitlist}}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section-white compact-hero">
+      <div class="container center-stack reveal">
+        <p class="eyebrow">{{team.leadership}}</p>
+        <h1>{{team.the_scurry_team}}</h1>
+        <p class="section-intro">{{team.scurry_is_led_by_experts_in_fi}}</p>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container team-grid">
+        <article class="team-card reveal">
+          <div class="team-photo-wrap"><img class="team-photo" src="images/eric.jpg" alt="{{team.eric_kinney}}"></div>
+          <div class="team-content">
+            <h2>{{team.eric_kinney}}</h2>
+            <p class="role">{{team.co_founder_ceo}}</p>
+            <p>{{team.with_over_three_decades_of_exp}}</p>
+            <p>{{team.he_holds_bachelor_s_degrees_in}}</p>
+            <p>{{team.beyond_his_professional_pursui}}</p>
+            <p class="role social-link"><img height="20" src="images/LI.png" alt="{{index.linkedin_icon}}"><a href="https://www.linkedin.com/in/erickinney" target="_blank">{{team.linkedin_com_in_erickinney}}</a></p>
+          </div>
+        </article>
+
+        <article class="team-card reveal delay-1">
+          <div class="team-photo-wrap"><img class="team-photo" src="images/andreas.jpg" alt="{{team.andreas_oesterer}}"></div>
+          <div class="team-content">
+            <h2>{{team.andreas_oesterer}}</h2>
+            <p class="role">{{team.co_founder_cto}}</p>
+            <p>{{team.an_innovative_and_results_driv}}</p>
+            <p>{{team.andreas_holds_a_bachelor_s_deg}}</p>
+            <p>{{team.outside_work_andreas_is_an_avi}}</p>
+            <p class="role social-link"><img height="20" src="images/LI.png" alt="{{index.linkedin_icon}}"><a href="https://www.linkedin.com/in/oesterer" target="_blank">{{team.linkedin_com_in_oesterer}}</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container split-grid align-center">
+        <div class="reveal split-copy">
+          <p class="eyebrow accent">{{team.meet_the_team}}</p>
+          <h2>{{team.learn_more_about_scurry_from_i}}</h2>
+                  </div>
+        <div>
+          <div class="video-frame reveal delay-1">
+            <iframe src="https://www.youtube.com/embed/_0xiq_G3xfg" title="{{team.meet_eric_kinney_video}}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand"><img src="images/logo.png" alt="{{index.scurry_logo}}"><span>{{index.scurry}}</span></a>
+        <p>{{index.stablecoin_stack_for_emerging}}</p>
+        <p class="role"><img height="20" src="images/LI.png" alt="{{index.linkedin_icon}}"><a href="https://www.linkedin.com/company/scurry" target="_blank">{{index.linkedin_com_in_scurry}}</a></p>
+      </div>
+      <div>
+        <h4>{{index.explore}}</h4>
+        <a href="index.html">{{index.home}}</a>
+        <a href="personal.html">{{index.personal}}</a>
+        <a href="business.html">{{index.business}}</a>
+        <a href="team.html">{{index.team}}</a>
+      </div>
+      <div>
+        <h4>{{index.company}}</h4>
+        <a href="about.html">{{index.about_scurry}}</a>
+        <a href="coming-soon.html">{{index.join_the_waitlist}}</a>
+      </div>
+    </div>
+    <div class="container disclosure-row">
+      <div class="disclosure-lite">{{index.scurry_is_a_financial_technolo}}</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
