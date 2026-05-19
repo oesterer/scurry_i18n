@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import fnmatch
 import html
 import json
 import re
@@ -12,6 +13,7 @@ LOCALES_DIR = ROOT / "locales"
 TRANSLATIONS_PATH = LOCALES_DIR / "translations.json"
 GENERATED_LOCALES_DIR = LOCALES_DIR / "generated"
 WEBSITE_DIR = ROOT / "website"
+ALWAYS_EXCLUDE_FROM_WEBSITE = {"README.md", "resume.sh"}
 
 HTML_FILES = sorted(path.name for path in ROOT.glob("*.html"))
 
@@ -254,19 +256,66 @@ def render_template(template, dictionary, locale):
     return re.sub(r'(<html\s+[^>]*lang=)["\'][^"\']+["\']', rf'\1"{html_lang}"', rendered, count=1)
 
 
+def load_gitignore_patterns():
+    gitignore_path = ROOT / ".gitignore"
+    if not gitignore_path.exists():
+        return []
+    patterns = []
+    for line in gitignore_path.read_text(encoding="utf-8").splitlines():
+        pattern = line.strip()
+        if not pattern or pattern.startswith("#") or pattern.startswith("!"):
+            continue
+        patterns.append(pattern)
+    return patterns
+
+
+def is_gitignored(path, patterns):
+    relative = path.relative_to(ROOT).as_posix()
+    name = path.name
+    for pattern in patterns:
+        normalized = pattern.strip("/")
+        if not normalized:
+            continue
+        if pattern.endswith("/") and (relative == normalized or relative.startswith(f"{normalized}/")):
+            return True
+        if "/" in normalized:
+            if fnmatch.fnmatch(relative, normalized):
+                return True
+        elif fnmatch.fnmatch(name, normalized):
+            return True
+    return False
+
+
+def should_copy_asset(path, gitignore_patterns):
+    if path.name.startswith("."):
+        return False
+    if path.name in ALWAYS_EXCLUDE_FROM_WEBSITE:
+        return False
+    if path.name in {"website", "locales", "__pycache__"}:
+        return False
+    if path.name in HTML_FILES or path.name == "i18n.py":
+        return False
+    return not is_gitignored(path, gitignore_patterns)
+
+
 def copy_assets(target_dir):
+    gitignore_patterns = load_gitignore_patterns()
     for item in ROOT.iterdir():
-        if item.name.startswith("."):
-            continue
-        if item.name in {"website", "locales", "__pycache__"}:
-            continue
-        if item.name in HTML_FILES or item.name == "i18n.py":
+        if not should_copy_asset(item, gitignore_patterns):
             continue
         destination = target_dir / item.name
         if item.is_dir():
             if destination.exists():
                 shutil.rmtree(destination)
-            shutil.copytree(item, destination, ignore=shutil.ignore_patterns(".*", "__pycache__"))
+            shutil.copytree(
+                item,
+                destination,
+                ignore=lambda directory, names: [
+                    name
+                    for name in names
+                    if not should_copy_asset(Path(directory) / name, gitignore_patterns)
+                ],
+            )
         elif item.is_file():
             shutil.copy2(item, destination)
 
