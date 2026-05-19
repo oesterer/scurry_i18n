@@ -3,8 +3,11 @@ import argparse
 import fnmatch
 import html
 import json
+import os
 import re
 import shutil
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 
@@ -143,6 +146,102 @@ def generate_locale_files(translations):
             encoding="utf-8",
         )
     return locales
+
+
+def translate_batch_with_openai(source_values, source_locale, target_language, model):
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise SystemExit("OPENAI_API_KEY is required for automated translation.")
+
+    system_prompt = (
+        "You are a professional website localizer. Translate the JSON values from "
+        f"{source_locale} into {target_language}. Return only a valid JSON object "
+        "with exactly the same keys. Preserve brand names, product names, URLs, "
+        "email addresses, numbers, currency symbols, and stablecoin terminology "
+        "unless a standard local equivalent is clearly appropriate."
+    )
+    payload = {
+        "model": model,
+        "temperature": 0,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {
+                "role": "user",
+                "content": json.dumps(source_values, ensure_ascii=False, indent=2),
+            },
+        ],
+    }
+    request = urllib.request.Request(
+        "https://api.openai.com/v1/chat/completions",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as error:
+        details = error.read().decode("utf-8", errors="replace")
+        raise SystemExit(f"OpenAI translation request failed: {error.code} {details}") from error
+    except urllib.error.URLError as error:
+        raise SystemExit(f"OpenAI translation request failed: {error.reason}") from error
+
+    try:
+        content = data["choices"][0]["message"]["content"]
+        translated = json.loads(content)
+    except (KeyError, IndexError, json.JSONDecodeError) as error:
+        raise SystemExit("OpenAI translation response did not contain a valid JSON object.") from error
+
+    missing = set(source_values) - set(translated)
+    extra = set(translated) - set(source_values)
+    if missing or extra:
+        raise SystemExit(
+            "OpenAI translation response keys did not match the request. "
+            f"Missing: {sorted(missing)[:5]} Extra: {sorted(extra)[:5]}"
+        )
+    return {key: str(value) for key, value in translated.items()}
+
+
+def add_locale(locale, target_language, source_locale, model, batch_size, overwrite):
+    translations = load_translations()
+    if not translations:
+        raise SystemExit(f"No translations found at {TRANSLATIONS_PATH}")
+    if not target_language:
+        raise SystemExit("--target-language is required.")
+    if batch_size < 1:
+        raise SystemExit("--batch-size must be at least 1.")
+
+    existing_values = [values.get(locale, "") for values in translations.values()]
+    if any(existing_values) and not overwrite:
+        raise SystemExit(f"{locale} already has translations. Use --overwrite to replace them.")
+
+    keys = list(translations)
+    translated_count = 0
+    for start in range(0, len(keys), batch_size):
+        batch_keys = keys[start : start + batch_size]
+        source_values = {
+            key: translations[key].get(source_locale, "")
+            for key in batch_keys
+            if translations[key].get(source_locale, "")
+        }
+        translated_values = translate_batch_with_openai(
+            source_values,
+            source_locale,
+            target_language,
+            model,
+        ) if source_values else {}
+        for key in batch_keys:
+            translations[key][locale] = translated_values.get(key, "")
+        translated_count += len(translated_values)
+        print(f"Translated {translated_count}/{len(keys)} entries into {locale}")
+
+    save_translations(translations)
+    generate_locale_files(translations)
+    print(f"Added {locale} to {TRANSLATIONS_PATH}")
 
 
 def load_locale(locale):
@@ -342,10 +441,40 @@ def build():
 
 def main():
     parser = argparse.ArgumentParser(description="Extract and build localized static Scurry website files.")
-    parser.add_argument(
-        "command",
-        choices=("extract", "generate", "build"),
-        help="extract English strings, generate locale dictionaries, or build website output",
+    subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers.add_parser("extract", help="extract English strings into translations.json")
+    subparsers.add_parser("generate", help="generate locale dictionaries from translations.json")
+    subparsers.add_parser("build", help="build localized website output")
+    add_locale_parser = subparsers.add_parser(
+        "add-locale",
+        help="add a locale to translations.json using automated translation",
+    )
+    add_locale_parser.add_argument("locale", help="Locale code to add, such as fr_FR or pt_BR")
+    add_locale_parser.add_argument(
+        "--target-language",
+        required=True,
+        help='Human-readable target language, such as "French (France)"',
+    )
+    add_locale_parser.add_argument(
+        "--source-locale",
+        default="en_US",
+        help="Source locale to translate from, default: en_US",
+    )
+    add_locale_parser.add_argument(
+        "--model",
+        default=os.environ.get("OPENAI_TRANSLATION_MODEL", "gpt-4o-mini"),
+        help="OpenAI model to use, default: OPENAI_TRANSLATION_MODEL or gpt-4o-mini",
+    )
+    add_locale_parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=40,
+        help="Number of strings to translate per API call, default: 40",
+    )
+    add_locale_parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Replace existing values for the locale if present",
     )
     args = parser.parse_args()
     if args.command == "extract":
@@ -354,6 +483,15 @@ def main():
         translations = load_translations()
         locales = generate_locale_files(translations)
         print(f"Generated locale dictionaries: {', '.join(locales)}")
+    elif args.command == "add-locale":
+        add_locale(
+            args.locale,
+            args.target_language,
+            args.source_locale,
+            args.model,
+            args.batch_size,
+            args.overwrite,
+        )
     else:
         build()
 

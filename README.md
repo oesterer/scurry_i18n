@@ -106,6 +106,51 @@ python3 i18n.py build
 
 ## Adding a New Locale
 
+You can add a locale manually or use automated translation.
+
+### Automated Initial Translation
+
+Automated translation uses the OpenAI API. Set `OPENAI_API_KEY` before running the command:
+
+```sh
+export OPENAI_API_KEY="your-api-key"
+```
+
+Then add the locale:
+
+```sh
+python3 i18n.py add-locale fr_FR --target-language "French (France)"
+```
+
+This command:
+
+- Reads English values from `en_US`.
+- Adds `fr_FR` to every entry in `locales/translations.json`.
+- Performs an initial automated translation.
+- Regenerates `locales/generated/fr_FR.json`.
+
+You can choose a different source locale:
+
+```sh
+python3 i18n.py add-locale pt_BR --target-language "Portuguese (Brazil)" --source-locale es_MX
+```
+
+You can choose a model with `--model` or the `OPENAI_TRANSLATION_MODEL` environment variable:
+
+```sh
+OPENAI_TRANSLATION_MODEL="gpt-4o-mini" python3 i18n.py add-locale de_DE --target-language "German (Germany)"
+```
+
+If the locale already has values, use `--overwrite` to replace them:
+
+```sh
+python3 i18n.py add-locale fr_FR --target-language "French (France)" --overwrite
+```
+
+Review automated translations before publishing.
+
+### Manual Locale Addition
+
 Add the new locale code to each entry in `locales/translations.json`:
 
 ```json
