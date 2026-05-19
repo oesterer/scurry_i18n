@@ -9,6 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 LOCALES_DIR = ROOT / "locales"
+TRANSLATIONS_PATH = LOCALES_DIR / "translations.json"
+GENERATED_LOCALES_DIR = LOCALES_DIR / "generated"
 WEBSITE_DIR = ROOT / "website"
 
 HTML_FILES = sorted(path.name for path in ROOT.glob("*.html"))
@@ -75,18 +77,6 @@ def make_key(page_stem, value, used_keys):
     return key
 
 
-def normalize_entry(value):
-    if isinstance(value, dict):
-        return {"value": value.get("value", "")}
-    return {"value": value}
-
-
-def locale_value(entry):
-    if isinstance(entry, dict):
-        return entry.get("value", "")
-    return entry
-
-
 def validate_key_lengths(entries):
     too_long = [key for key in entries if "." in key and len(key.split(".", 1)[1]) > 30]
     if too_long:
@@ -104,8 +94,57 @@ def legacy_make_key(page_stem, context, value, used_keys):
     return key
 
 
+def load_translations():
+    if TRANSLATIONS_PATH.exists():
+        with TRANSLATIONS_PATH.open(encoding="utf-8") as file:
+            return json.load(file)
+    legacy_files = sorted(
+        path for path in LOCALES_DIR.glob("*.json") if path.name != TRANSLATIONS_PATH.name
+    )
+    translations = {}
+    for path in legacy_files:
+        locale = path.stem
+        with path.open(encoding="utf-8") as file:
+            dictionary = json.load(file)
+        for key, entry in dictionary.items():
+            value = entry.get("value", "") if isinstance(entry, dict) else entry
+            translations.setdefault(key, {})[locale] = value
+    return translations
+
+
+def save_translations(translations):
+    validate_key_lengths(translations)
+    LOCALES_DIR.mkdir(exist_ok=True)
+    TRANSLATIONS_PATH.write_text(
+        json.dumps(translations, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def available_locales(translations):
+    locales = set()
+    for values in translations.values():
+        locales.update(values)
+    return sorted(locales)
+
+
+def generate_locale_files(translations):
+    GENERATED_LOCALES_DIR.mkdir(parents=True, exist_ok=True)
+    locales = available_locales(translations)
+    for locale in locales:
+        dictionary = {
+            key: {"value": values.get(locale, "")}
+            for key, values in translations.items()
+        }
+        (GENERATED_LOCALES_DIR / f"{locale}.json").write_text(
+            json.dumps(dictionary, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    return locales
+
+
 def load_locale(locale):
-    path = LOCALES_DIR / f"{locale}.json"
+    path = GENERATED_LOCALES_DIR / f"{locale}.json"
     if not path.exists():
         raise SystemExit(f"Missing locale dictionary: {path}")
     with path.open(encoding="utf-8") as file:
@@ -114,21 +153,21 @@ def load_locale(locale):
 
 def extract():
     LOCALES_DIR.mkdir(exist_ok=True)
-    locale_path = LOCALES_DIR / "en_US.json"
-    if locale_path.exists():
-        entries = {
-            key: normalize_entry(entry)
-            for key, entry in json.loads(locale_path.read_text(encoding="utf-8")).items()
-        }
-    else:
-        entries = {}
+    translations = load_translations()
+    entries = {
+        key: values.get("en_US", "")
+        for key, values in translations.items()
+    }
     text_to_key = {
-        locale_value(entry): key
-        for key, entry in entries.items()
-        if locale_value(entry)
+        value: key
+        for key, value in entries.items()
+        if value
     }
     used_keys = set(entries)
     validate_key_lengths(entries)
+    locales = available_locales(translations) or ["en_US"]
+    if "en_US" not in locales:
+        locales.insert(0, "en_US")
 
     for file_name in HTML_FILES:
         path = ROOT / file_name
@@ -156,7 +195,10 @@ def extract():
                     if not key:
                         key = make_key(page_stem, value, used_keys)
                         text_to_key[value] = key
-                        entries[key] = {"value": value}
+                        translations[key] = {
+                            locale: value if locale == "en_US" else ""
+                            for locale in locales
+                        }
                     return f'{name}={quote}{{{{{key}}}}}{quote}'
 
                 output.append(ATTR_RE.sub(replace_attr, part))
@@ -182,18 +224,19 @@ def extract():
                 if not key:
                     key = make_key(page_stem, value, used_keys)
                     text_to_key[value] = key
-                    entries[key] = {"value": value}
+                    translations[key] = {
+                        locale: value if locale == "en_US" else ""
+                        for locale in locales
+                    }
                 output.append(f"{leading}{{{{{key}}}}}{trailing}")
             else:
                 output.append(part)
 
         path.write_text("".join(output), encoding="utf-8")
 
-    locale_path.write_text(
-        json.dumps(entries, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    print(f"Extracted {len(entries)} strings to {locale_path}")
+    save_translations(translations)
+    generate_locale_files(translations)
+    print(f"Extracted {len(translations)} strings to {TRANSLATIONS_PATH}")
 
 
 def render_template(template, dictionary, locale):
@@ -229,9 +272,10 @@ def copy_assets(target_dir):
 
 
 def build():
+    translations = load_translations()
+    locales = generate_locale_files(translations)
     WEBSITE_DIR.mkdir(exist_ok=True)
-    for locale_path in sorted(LOCALES_DIR.glob("*.json")):
-        locale = locale_path.stem
+    for locale in locales:
         dictionary = load_locale(locale)
         locale_dir = WEBSITE_DIR / locale
         if locale_dir.exists():
@@ -249,10 +293,18 @@ def build():
 
 def main():
     parser = argparse.ArgumentParser(description="Extract and build localized static Scurry website files.")
-    parser.add_argument("command", choices=("extract", "build"), help="extract English strings or build website output")
+    parser.add_argument(
+        "command",
+        choices=("extract", "generate", "build"),
+        help="extract English strings, generate locale dictionaries, or build website output",
+    )
     args = parser.parse_args()
     if args.command == "extract":
         extract()
+    elif args.command == "generate":
+        translations = load_translations()
+        locales = generate_locale_files(translations)
+        print(f"Generated locale dictionaries: {', '.join(locales)}")
     else:
         build()
 
