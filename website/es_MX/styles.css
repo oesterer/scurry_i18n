@@ -208,6 +208,43 @@ h4 {
   color: #fff !important;
 }
 
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding-left: 12px;
+  border-left: 1px solid currentColor;
+}
+
+.glass-nav .language-switcher {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.solid-nav .language-switcher {
+  color: rgba(8, 19, 33, 0.16);
+}
+
+.site-nav .language-switcher a {
+  min-width: 44px;
+  padding: 9px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.glass-nav .site-nav .language-switcher a {
+  color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.solid-nav .site-nav .language-switcher a {
+  color: var(--text);
+  border-color: var(--line);
+}
+
 /* Hero */
 .hero-home {
   min-height: min(720px, calc(100vh - var(--nav)));
@@ -1087,6 +1124,18 @@ h4 {
 
   .site-nav a {
     text-align: center;
+  }
+
+  .language-switcher {
+    justify-content: center;
+    margin: 8px 0 0;
+    padding: 12px 0 0;
+    border-left: 0;
+    border-top: 1px solid currentColor;
+  }
+
+  .site-nav .language-switcher a {
+    width: 100%;
   }
 
   .hero-copy h1,

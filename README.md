@@ -14,7 +14,9 @@ This repository uses simple HTML templates plus JSON translation files to genera
 │       ├── en_US.json
 │       └── es_MX.json
 └── website/
-    ├── en_US/
+    ├── index.html
+    ├── about.html
+    ├── ...
     └── es_MX/
 ```
 
@@ -77,16 +79,29 @@ This reads `locales/translations.json` and writes one generated dictionary per l
 python3 i18n.py build
 ```
 
-This generates the localized websites into `website/<locale>/`.
+This generates the default English site directly into `website/`. Other locales are generated into `website/<locale>/`.
 
 For example:
 
 ```text
-website/en_US/index.html
+website/index.html
 website/es_MX/index.html
 ```
 
 Assets such as CSS, JavaScript, images, and favicon files are copied into each locale folder so each generated site can be served independently.
+
+Generated pages include locale metadata:
+
+- `<html lang="...">`
+- `<link rel="alternate" hreflang="...">`
+- `<link rel="alternate" hreflang="x-default">`
+- `og:locale` and `og:locale:alternate`
+
+Alternate links use relative URLs by default. To generate absolute URLs, set `SITE_BASE_URL`:
+
+```sh
+SITE_BASE_URL="https://example.com" python3 i18n.py build
+```
 
 ### Extract New English Text
 

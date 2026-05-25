@@ -17,6 +17,11 @@ TRANSLATIONS_PATH = LOCALES_DIR / "translations.json"
 GENERATED_LOCALES_DIR = LOCALES_DIR / "generated"
 WEBSITE_DIR = ROOT / "website"
 ALWAYS_EXCLUDE_FROM_WEBSITE = {"README.md", "resume.sh"}
+DEFAULT_LOCALE = "en_US"
+LOCALE_LABELS = {
+    "en_US": "English",
+    "es_MX": "Español",
+}
 
 HTML_FILES = sorted(path.name for path in ROOT.glob("*.html"))
 
@@ -340,7 +345,89 @@ def extract():
     print(f"Extracted {len(translations)} strings to {TRANSLATIONS_PATH}")
 
 
-def render_template(template, dictionary, locale):
+def locale_label(locale):
+    return LOCALE_LABELS.get(locale, locale.replace("_", "-"))
+
+
+def output_dir_for_locale(locale):
+    if locale == DEFAULT_LOCALE:
+        return WEBSITE_DIR
+    return WEBSITE_DIR / locale
+
+
+def relative_page_href(from_locale, to_locale, file_name):
+    if from_locale == to_locale:
+        return file_name
+    if from_locale == DEFAULT_LOCALE:
+        return f"{to_locale}/{file_name}"
+    if to_locale == DEFAULT_LOCALE:
+        return f"../{file_name}"
+    return f"../{to_locale}/{file_name}"
+
+
+def absolute_page_href(locale, file_name):
+    site_base_url = os.environ.get("SITE_BASE_URL", "").rstrip("/")
+    if locale == DEFAULT_LOCALE:
+        path = file_name
+    else:
+        path = f"{locale}/{file_name}"
+    if not site_base_url:
+        return path
+    return f"{site_base_url}/{path}"
+
+
+def alternate_page_href(from_locale, to_locale, file_name):
+    if os.environ.get("SITE_BASE_URL", "").rstrip("/"):
+        return absolute_page_href(to_locale, file_name)
+    return relative_page_href(from_locale, to_locale, file_name)
+
+
+def locale_head_tags(current_locale, locales, file_name):
+    tags = []
+    for locale in locales:
+        html_lang = locale.replace("_", "-")
+        href = html.escape(alternate_page_href(current_locale, locale, file_name), quote=True)
+        tags.append(f'  <link rel="alternate" hreflang="{html_lang}" href="{href}">')
+    default_href = html.escape(alternate_page_href(current_locale, DEFAULT_LOCALE, file_name), quote=True)
+    tags.append(f'  <link rel="alternate" hreflang="x-default" href="{default_href}">')
+    tags.append(f'  <meta property="og:locale" content="{current_locale}">')
+    for locale in locales:
+        if locale != current_locale:
+            tags.append(f'  <meta property="og:locale:alternate" content="{locale}">')
+    return "\n".join(tags)
+
+
+def inject_locale_head_tags(rendered, current_locale, locales, file_name):
+    tags = locale_head_tags(current_locale, locales, file_name)
+    return rendered.replace("</head>", f"{tags}\n</head>", 1)
+
+
+def render_language_switcher(current_locale, locales, file_name):
+    links = []
+    for locale in locales:
+        if locale == current_locale:
+            continue
+        html_lang = locale.replace("_", "-")
+        label = html.escape(locale_label(locale))
+        href = html.escape(relative_page_href(current_locale, locale, file_name))
+        links.append(f'<a href="{href}" hreflang="{html_lang}" lang="{html_lang}">{label}</a>')
+    if not links:
+        return ""
+    return (
+        '<div class="language-switcher" aria-label="Language options">'
+        + "".join(links)
+        + "</div>"
+    )
+
+
+def inject_language_switcher(rendered, current_locale, locales, file_name):
+    switcher = render_language_switcher(current_locale, locales, file_name)
+    if not switcher:
+        return rendered
+    return rendered.replace("</nav>", f"{switcher}\n      </nav>", 1)
+
+
+def render_template(template, dictionary, locale, locales, file_name):
     def replace(match):
         key = match.group(1)
         entry = dictionary.get(key)
@@ -352,7 +439,9 @@ def render_template(template, dictionary, locale):
 
     rendered = PLACEHOLDER_RE.sub(replace, template)
     html_lang = locale.replace("_", "-")
-    return re.sub(r'(<html\s+[^>]*lang=)["\'][^"\']+["\']', rf'\1"{html_lang}"', rendered, count=1)
+    rendered = re.sub(r'(<html\s+[^>]*lang=)["\'][^"\']+["\']', rf'\1"{html_lang}"', rendered, count=1)
+    rendered = inject_locale_head_tags(rendered, locale, locales, file_name)
+    return inject_language_switcher(rendered, locale, locales, file_name)
 
 
 def load_gitignore_patterns():
@@ -419,22 +508,51 @@ def copy_assets(target_dir):
             shutil.copy2(item, destination)
 
 
+def clean_website_output(locales):
+    WEBSITE_DIR.mkdir(exist_ok=True)
+    gitignore_patterns = load_gitignore_patterns()
+    default_files = set(HTML_FILES)
+    for item in ROOT.iterdir():
+        if should_copy_asset(item, gitignore_patterns):
+            default_files.add(item.name)
+
+    for item in WEBSITE_DIR.iterdir():
+        if item.name.startswith(".") or is_gitignored(item, gitignore_patterns):
+            if item.is_dir():
+                shutil.rmtree(item)
+            else:
+                item.unlink()
+
+    for name in default_files:
+        path = WEBSITE_DIR / name
+        if path.is_dir():
+            shutil.rmtree(path)
+        elif path.exists():
+            path.unlink()
+
+    for locale in locales:
+        locale_dir = WEBSITE_DIR / locale
+        if locale_dir.exists() and locale_dir.is_dir():
+            shutil.rmtree(locale_dir)
+
+
 def build():
     translations = load_translations()
     locales = generate_locale_files(translations)
-    WEBSITE_DIR.mkdir(exist_ok=True)
+    clean_website_output(locales)
     for locale in locales:
         dictionary = load_locale(locale)
-        locale_dir = WEBSITE_DIR / locale
+        locale_dir = output_dir_for_locale(locale)
         if locale_dir.exists():
-            shutil.rmtree(locale_dir)
+            if locale != DEFAULT_LOCALE:
+                shutil.rmtree(locale_dir)
         locale_dir.mkdir(parents=True, exist_ok=True)
         copy_assets(locale_dir)
         for file_name in HTML_FILES:
             source = ROOT / file_name
             if not source.exists():
                 continue
-            rendered = render_template(source.read_text(encoding="utf-8"), dictionary, locale)
+            rendered = render_template(source.read_text(encoding="utf-8"), dictionary, locale, locales, file_name)
             (locale_dir / file_name).write_text(rendered, encoding="utf-8")
         print(f"Generated {locale_dir}")
 

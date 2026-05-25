@@ -12,7 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
-  <title>Join the waitlist | Scurry</title>
+  <title>About Scurry | Company</title>
+  <link rel="alternate" hreflang="en-US" href="about.html">
+  <link rel="alternate" hreflang="es-MX" href="es_MX/about.html">
+  <link rel="alternate" hreflang="x-default" href="about.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
 </head>
 <body>
   
@@ -26,19 +31,34 @@
       <nav id="site-nav" class="site-nav">
         <a href="personal.html">Personal</a>
         <a href="business.html">Business</a>
-        <a href="about.html">Company</a>
+        <a href="about.html" class="active">Company</a>
         <a href="team.html">Team</a>
         <a href="faq.html">FAQ</a>
         <a href="coming-soon.html" class="nav-cta">Join waitlist</a>
+      <div class="language-switcher" aria-label="Language options"><a href="es_MX/about.html" hreflang="es-MX" lang="es-MX">Español</a></div>
       </nav>
     </div>
   </header>
 
-  <main class="section section-light waitlist-shell">
-    <div class="container waitlist-card reveal visible">
-      <p class="eyebrow">Coming soon</p>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbxxU-2JRULag57qthW07WJlSWEFFRSmgs9vZPrsU0keuzTw/viewform?embedded=true" width="640" height="2206" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </div>
+  <main>
+    <section class="page-hero section-light compact-hero">
+      <div class="container center-stack reveal">
+        <p class="eyebrow">About the company</p>
+        <h1>Focused on emerging markets</h1>
+        <p class="section-intro">Scurry’s ambitions are to be a global stablecoin and financial services platform.</p>
+      </div>
+    </section>   
+
+    <section class="section section-white image-section market-image-section">
+      <div class="container section-heading reveal">
+        <h2>Market focus</h2>
+      </div>
+      <div class="container feature-grid three-up">
+        <article class="feature-card reveal"><h3>Emerging Markets</h3><p>High inflation and unstable currencies create strong demand for more flexible financial infrastructure</p></article>
+        <article class="feature-card reveal delay-1"><h3>Unbanked Individuals and Businesses</h3><p>Scurry is aimed at users and operators who still lack access to reliable financial services</p></article>
+        <article class="feature-card reveal delay-1"><h3>The Innovators</h3><p>Enthusiasts of credit and blockchain innovation</p></article>
+      </div>
+    </section>
   </main>
   
   <footer class="site-footer">
