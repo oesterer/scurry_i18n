@@ -120,6 +120,26 @@
     window.addEventListener('load', startMockupCycle);
   }
 
+  const blogEntries = Array.from(document.querySelectorAll('[data-blog-entry]'));
+
+  blogEntries.forEach(function (entry) {
+    const toggle = entry.querySelector('.blog-toggle');
+    const extra = entry.querySelector('.blog-extra');
+
+    if (!toggle || !extra) {
+      return;
+    }
+
+    toggle.addEventListener('click', function () {
+      const isExpanded = entry.classList.toggle('is-expanded');
+      extra.hidden = !isExpanded;
+      toggle.textContent = isExpanded ? toggle.dataset.showLess : toggle.dataset.readMore;
+      toggle.setAttribute('aria-expanded', String(isExpanded));
+    });
+
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+
     const faqSearch = document.querySelector('#faq-search');
     const faqGroups = Array.from(document.querySelectorAll('[data-faq-group]'));
     const noResults = document.querySelector('.faq-no-results');

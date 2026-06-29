@@ -556,5 +556,23 @@
   },
   "coming_soon.loading": {
     "value": "Cargando…"
+  },
+  "index.blog": {
+    "value": "El blog"
+  },
+  "blog.blog_scurry": {
+    "value": "El blog | Scurry"
+  },
+  "blog.insights": {
+    "value": "Ideas"
+  },
+  "blog.notes_on_stablecoins_credit": {
+    "value": "Notas sobre stablecoins, crédito, pagos y acceso financiero del equipo de Scurry."
+  },
+  "blog.read_more": {
+    "value": "Leer más"
+  },
+  "blog.show_less": {
+    "value": "Mostrar menos"
   }
 }

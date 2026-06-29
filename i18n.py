@@ -16,7 +16,7 @@ LOCALES_DIR = ROOT / "locales"
 TRANSLATIONS_PATH = LOCALES_DIR / "translations.json"
 GENERATED_LOCALES_DIR = LOCALES_DIR / "generated"
 WEBSITE_DIR = ROOT / "website"
-ALWAYS_EXCLUDE_FROM_WEBSITE = {"README.md", "resume.sh"}
+ALWAYS_EXCLUDE_FROM_WEBSITE = {"README.md", "blog_sources", "resume.sh"}
 DEFAULT_LOCALE = "en_US"
 LOCALE_LABELS = {
     "en_US": "English",
@@ -515,9 +515,14 @@ def clean_website_output(locales):
     for item in ROOT.iterdir():
         if should_copy_asset(item, gitignore_patterns):
             default_files.add(item.name)
+    expected_top_level = default_files | {locale for locale in locales if locale != DEFAULT_LOCALE}
 
     for item in WEBSITE_DIR.iterdir():
-        if item.name.startswith(".") or is_gitignored(item, gitignore_patterns):
+        if (
+            item.name.startswith(".")
+            or is_gitignored(item, gitignore_patterns)
+            or item.name not in expected_top_level
+        ):
             if item.is_dir():
                 shutil.rmtree(item)
             else:

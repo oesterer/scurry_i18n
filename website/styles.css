@@ -1400,6 +1400,100 @@ h4 {
     width: min(250px, 82vw);
   }
 }
+
+/* Blog page */
+.blog-section {
+  padding-top: 76px;
+}
+
+.blog-list {
+  display: grid;
+  gap: 28px;
+  max-width: 900px;
+}
+
+.blog-entry {
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(4, 15, 26, 0.08);
+}
+
+.blog-entry-header {
+  margin-bottom: 18px;
+}
+
+.blog-meta {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.blog-entry h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.blog-body {
+  color: var(--muted);
+  font-size: 1.03rem;
+}
+
+.blog-body h3 {
+  margin: 30px 0 12px;
+  color: var(--text);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.blog-body p,
+.blog-body ul,
+.blog-body blockquote {
+  margin-bottom: 18px;
+}
+
+.blog-body blockquote {
+  margin-left: 0;
+  padding: 18px 20px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  background: var(--surface-soft);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.blog-body ul {
+  padding-left: 22px;
+}
+
+.blog-body li {
+  margin-bottom: 8px;
+}
+
+.blog-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(25, 173, 252, 0.4);
+  background: transparent;
+  color: var(--accent-deep);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0 0 3px;
+}
+
+.blog-toggle:hover,
+.blog-toggle:focus-visible {
+  color: #075ba4;
+}
+
 /* FAQ page */
 .faq-hero {
   padding: 120px 0 92px;
