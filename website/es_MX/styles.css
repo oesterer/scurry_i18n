@@ -1494,6 +1494,40 @@ h4 {
   color: #075ba4;
 }
 
+/* Blog hero image */
+.blog-hero-image {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 18, 29, 0.88) 0%,
+      rgba(8, 18, 29, 0.72) 50%,
+      rgba(8, 18, 29, 0.48) 100%
+    ),
+    url("images/brazil.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.blog-hero-image .container {
+  position: relative;
+  z-index: 1;
+}
+
+.blog-hero-image .eyebrow,
+.blog-hero-image h1 {
+  color: #fff;
+}
+
+.blog-hero-image h1 {
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* FAQ page */
 .faq-hero {
   padding: 120px 0 92px;
