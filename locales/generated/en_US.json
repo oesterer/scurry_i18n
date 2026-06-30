@@ -574,5 +574,8 @@
   },
   "blog.show_less": {
     "value": "Show less"
+  },
+  "blog.insights_on_stablecoins_credit": {
+    "value": "Insights on stablecoins, credit, payments, and financial access"
   }
 }

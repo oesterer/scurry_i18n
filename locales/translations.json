@@ -766,5 +766,10 @@
   "blog.show_less": {
     "en_US": "Show less",
     "es_MX": "Mostrar menos"
+  },
+    "blog.insights_on_stablecoins_credit": {
+    "en_US": "Insights on stablecoins, credit, payments, and financial access",
+    "es_MX": "Perspectivas sobre stablecoins, crédito, pagos y acceso financiero"
   }
+  
 }
