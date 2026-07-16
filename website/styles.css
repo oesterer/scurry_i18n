@@ -1420,6 +1420,10 @@ h4 {
   box-shadow: 0 18px 48px rgba(4, 15, 26, 0.08);
 }
 
+.blog-entry-first {
+  order: -1;
+}
+
 .blog-entry-header {
   margin-bottom: 18px;
 }

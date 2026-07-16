@@ -44,7 +44,7 @@
 
     <section class="section section-white blog-section">
       <div class="container blog-list">
-        <article class="blog-entry reveal" data-blog-entry>
+        <article class="blog-entry reveal delay-1" data-blog-entry>
           <header class="blog-entry-header">
             <p class="blog-meta"><time datetime="2026-07">July 2026</time> · Eric Kinney</p>
             <h2>&quot;Move Fast and Break Things&quot; Is Over. Here&#x27;s What We Do Instead.</h2>
@@ -94,7 +94,7 @@
           <button class="blog-toggle" type="button" data-read-more="{{blog.read_more}}" data-show-less="{{blog.show_less}}">{{blog.read_more}}</button>
         </article>
 
-        <article class="blog-entry reveal delay-1" data-blog-entry>
+        <article class="blog-entry reveal delay-2" data-blog-entry>
           <header class="blog-entry-header">
             <p class="blog-meta"><time datetime="2026-07">July 2026</time> · Eric Kinney</p>
             <h2>Why We Built Scurry — Compliance-First from Day One</h2>
@@ -145,6 +145,55 @@
               <p>The world is getting dollarized. One stablecoin card at a time.</p>
               <p>Stable money. No borders.</p>
               <p>Build Right. Move Far.</p>
+            </div>
+          </div>
+          <button class="blog-toggle" type="button" data-read-more="{{blog.read_more}}" data-show-less="{{blog.show_less}}">{{blog.read_more}}</button>
+        </article>
+
+        <article class="blog-entry blog-entry-first reveal" data-blog-entry>
+          <header class="blog-entry-header">
+            <p class="blog-meta"><time datetime="2026-07">July 2026</time> · Eric Kinney</p>
+            <h2>What Is a Stablecoin? (And Why Does It Matter for Your Business in Mexico?)</h2>
+          </header>
+          <div class="blog-body">
+            <p>If you run a business with any connection to Mexico — paying suppliers, receiving payments from U.S. customers, managing payroll across the border, or simply trying to protect your cash from currency volatility — you've probably felt the friction.</p>
+            <div class="blog-extra" hidden>
+              <p>The wire that takes three days. The 5-6% that disappears into fees and exchange rate spreads before your money arrives. The cut-off window you missed because your bank closes at 3pm. The supplier in Monterrey who still wants to be paid in pesos, which means you're converting dollars to USDC to pesos and losing something at every step.</p>
+              <p>That friction isn't a technology problem. It's an infrastructure problem. And stablecoins are the infrastructure solution that's already working — right now, at scale, on the U.S.-Mexico corridor.</p>
+              <p>Here's what you need to know.</p>
+              <h3>What Is a Stablecoin?</h3>
+              <p>A stablecoin is a digital currency pegged 1:1 to a stable asset — usually the U.S. dollar. One USDC equals one dollar. Always. It doesn't fluctuate the way Bitcoin does. It doesn't lose value overnight. It's the dollar, running on blockchain rails instead of correspondent bank rails.</p>
+              <p>Think of it this way: the U.S. dollar is the most trusted currency in the world. A dollar stablecoin is that same dollar, but able to move anywhere on earth in minutes, at a fraction of the cost, 24 hours a day, seven days a week, without waiting for a bank to open or a wire to clear.</p>
+              <p>That's not a cryptocurrency speculation play. That's a payment rail.</p>
+              <p>The two dominant stablecoins in business use today are USDC (issued by Circle, backed 1:1 by cash and U.S. Treasuries with monthly attestations) and USDT (Tether, the most traded stablecoin globally). For businesses operating in regulated environments — and for any platform with serious Anti Money Laundering and compliance requirements — USDC is the institutional-grade choice. It's the one Visa is now settling on. It's the one Nubank embedded as a core product for its 127 million customers across LATAM. It's the one we built Scurry around.</p>
+              <h3>Why This Matters Specifically for Mexico</h3>
+              <p>Mexico's remittance corridor with the United States is the fourth largest in the world — $42.8 billion flowing annually, most of it from Mexican families and workers in California and Texas sending money home.</p>
+              <p>The average cost of sending that money through traditional channels: 6.49% of the amount sent. On a $500 transfer, that's $32 gone before it arrives. Multiply that across millions of transfers and you're looking at billions of dollars extracted annually from people who can least afford it.</p>
+              <p>Stablecoins compress that cost by 80-90%.</p>
+              <p>Bitso, Mexico's largest crypto exchange, processed $6.5 billion in U.S.-Mexico crypto remittances in 2024 — roughly 10% of the entire corridor — with competitive FX and same-day settlement. Felix Pago has processed over $1 billion through a USDC-to-SPEI model that settles via WhatsApp, at fees well below Western Union's. BBVA Mexico reported 450% growth in USDC transaction volume. Stablecoins now account for approximately 8% of Mexico's entire remittance market — and the infrastructure is accelerating.</p>
+              <p>This isn't a pilot. It's not a proof of concept. It's live volume, moving through regulated rails, settling in minutes.</p>
+              <h3>What This Means for Your Business</h3>
+              <p>The remittance story gets the headlines. But the business case for stablecoins in Mexico goes far beyond families sending money home.</p>
+              <p><strong>If you're a U.S. business paying Mexican suppliers:</strong> A traditional wire to a supplier in CDMX or Monterrey typically takes 1-3 business days, costs 2-5% in fees and FX markups, requires a cut-off submission before 3pm on a business day, and generates reconciliation paperwork that your treasury team spends hours on. A USDC settlement reaches the same supplier in minutes, at a fraction of the cost, any time of day, any day of the week — with a clean on-chain record for reconciliation.</p>
+              <p><strong>If you're a Mexican business receiving payments from U.S. clients:</strong> You've been at the mercy of correspondent banking delays, FX conversion spreads, and a settlement calendar that doesn't respect your cash flow needs. Stablecoin rails flip that dynamic. You receive in USDC, convert to pesos through local rails (SPEI settlement is already live), and the entire cycle takes hours, not days.</p>
+              <p><strong>If you're managing cross-border payroll:</strong> Stablecoins settle 24/7. Your contractor in Guadalajara doesn't wait until Monday for a payment you sent on Friday. Your treasury doesn't pre-fund accounts across multiple currencies. You position liquidity on-chain and move it when you need it.</p>
+              <p><strong>If you're worried about FX volatility:</strong> The peso's exposure to U.S. monetary policy and local inflation is structural. A USDC-denominated treasury position gives your business dollar stability without requiring a U.S. bank account or a complex hedging strategy.</p>
+              <h3>The Regulatory Picture — Right Now</h3>
+              <p>One of the consistent objections to stablecoins in business contexts is regulatory uncertainty. That objection is increasingly outdated.</p>
+              <p>In the United States, the GENIUS Act — signed July 18, 2025 — established the first federal framework for payment stablecoins: 1:1 reserves, monthly attestations, and AML compliance requirements. The jurisdictional ambiguity that slowed institutional adoption in 2023 and 2024 is largely resolved.</p>
+              <p>In Mexico, the Ley Fintech (fully implemented in 2024) authorized 23 institutions for stablecoin services. B2B stablecoin operators function under Mexico's AML regime as non-financial entities — workable today, with regulatory modernization actively underway. The corridor between the U.S. and Mexico is one of the most active stablecoin corridors in the world precisely because the regulatory foundations on both ends are increasingly clear.</p>
+              <p>This is the window. The rails are built. The regulatory frameworks are arriving. The businesses that move now are the ones that capture the cost and speed advantage before this becomes table stakes.</p>
+              <h3>Why Compliance Has to Come First</h3>
+              <p>Here's where Scurry is different from most of the stablecoin platforms operating in this corridor.</p>
+              <p>We built our AML program before we built our product. We registered as a Money Services Business with FinCEN before we acquired our first user. We designed our KYC framework, sanctions screening, and transaction monitoring as core infrastructure — not an afterthought added when a banking partner asked for it.</p>
+              <p>That's not standard in this space. It should be.</p>
+              <p>The communities we're serving — the families sending money home, the businesses managing cross-border payroll, the entrepreneurs in Argentina and Colombia and Mexico managing dollar-denominated savings — have been failed by institutions that moved fast and broke things. The compliance failures that defined fintech's worst moments happened in markets like this one.</p>
+              <p>We're not repeating that. And the banking partners, regulators, and institutional clients who want to operate in this corridor know the difference between a stablecoin platform with real compliance infrastructure and one that's hoping to outrun enforcement.</p>
+              <p>Stable money. No borders. Build right. Move Far.</p>
+              <h3>What's Next</h3>
+              <p>Scurry's waitlist is live at https://www.scurry.us in English and Spanish. We're actively piloting in Mexico and LATAM, with a phased rollout starting on the U.S.-Mexico remittance corridor.</p>
+              <p>If you're a business operating across this corridor — or a banking partner or institutional investor who wants to understand what compliant stablecoin infrastructure looks like — we'd like to talk.</p>
+              <p>The infrastructure is here. The regulatory clarity is arriving. The window to build this correctly is open.</p>
             </div>
           </div>
           <button class="blog-toggle" type="button" data-read-more="{{blog.read_more}}" data-show-less="{{blog.show_less}}">{{blog.read_more}}</button>
