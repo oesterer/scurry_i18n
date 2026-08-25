@@ -47,6 +47,60 @@
         <article class="blog-entry reveal" data-blog-entry>
           <header class="blog-entry-header">
             <p class="blog-meta"><time datetime="2026-08">August 2026</time> · Eric Kinney</p>
+            <h2>The GENIUS Act: What It Actually Means for Stablecoin Businesses</h2>
+          </header>
+          <div class="blog-body">
+            <p>On July 18, 2025, President Trump signed the Guiding and Establishing National Innovation for U.S. Stablecoins Act — the GENIUS Act — into law. It passed with unusual bipartisan strength: 68-30 in the Senate, 308-122 in the House.</p>
+            <div class="blog-extra" hidden>
+              <p>That vote count matters. This wasn't a partisan crypto bill. It was a broad congressional consensus that the regulatory ambiguity surrounding stablecoins had lasted long enough, and that the United States needed a clear framework before the rest of the world built one without us.</p>
+              <p>For businesses considering stablecoin rails — and for anyone building stablecoin infrastructure — the GENIUS Act is the most important regulatory development in the history of digital payments. Here's what it actually says, what it still leaves open, and what it means for how Scurry is built.</p>
+              <h3>What the GENIUS Act Actually Does</h3>
+              <p>Before the Act, stablecoin issuers operated in a regulatory gray area. Depending on who you asked, they were money transmitters, unregistered securities issuers, bank-like entities, or none of the above. That ambiguity made banking partners nervous, institutional adoption slow, and compliance programs inconsistent.</p>
+              <p>The GENIUS Act resolves the fundamental question: what is a payment stablecoin, and who can issue one?</p>
+              <p><strong>Definition:</strong> A payment stablecoin is a digital asset issued for payment or settlement, redeemable at a fixed predetermined value (one dollar equals one dollar), backed 1:1 by high-quality reserves. Crucially, the Act states that payment stablecoins issued by permitted issuers are not securities or commodities— ending years of jurisdictional uncertainty between the SEC and CFTC.</p>
+              <p><strong>Who can issue:</strong> Only “Permitted Payment Stablecoin Issuers” — entities that have obtained either a federal license or a qualifying state license. State-qualified issuers with outstanding issuance of not more than $10 billion may operate under a state-level regulatory regime, but only where that regime is “substantially similar” to the federal framework. Exceed $10 billion and you transition to federal oversight.</p>
+              <h3>The Five Requirements That Matter Most</h3>
+              <p><strong>1. 1:1 Reserve Backing — No Exceptions</strong></p>
+              <p>Issuers must hold at least one dollar of permitted reserves for every one dollar of stablecoins issued. Those reserves are limited to specific high-quality, liquid assets: U.S. coins and currency, insured bank deposits, short-dated Treasury bills, repurchase agreements backed by Treasuries, government money market funds, central bank reserves, and similar government-issued assets approved by regulators.</p>
+              <p>No fractional reserve. No holding crypto as a reserve asset. No creative accounting. One dollar in, one dollar held. This is what makes a payment stablecoin trustworthy at scale — and it's what distinguishes regulated stablecoins from the algorithmic experiments that collapsed the crypto market in 2022.</p>
+              <p><strong>2. Monthly Reserve Reporting with Executive Sign-Off</strong></p>
+              <p>Issuers must publish monthly reports detailing reserve composition and total stablecoins outstanding, with CEO and CFO certifications of accuracy. These reports must be examined monthly by independent registered public accounting firms.</p>
+              <p>This is a higher reporting standard than most public companies face. Monthly attestations, independently examined, signed by the CEO and CFO. If your reserves don't match your outstanding stablecoins, it's not a disclosure issue — it's a federal compliance violation.</p>
+              <p><strong>3. Full BSA/AML Treatment</strong></p>
+              <p>For purposes of the Bank Secrecy Act, a payment stablecoin issuer will be considered a financial institution and must implement a robust AML and sanctions compliance program, including the designation of an officer to supervise the program.</p>
+              <p>This is the provision that matters most to us at Scurry — and the one that most directly validates the compliance-first approach we've taken from day one. Stablecoin issuers are now explicitly financial institutions under the BSA. That means customer identification programs, transaction monitoring, suspicious activity reporting, and a designated compliance officer. Not optional. Not scalable later. Required from the moment you issue.</p>
+              <p>Issuers must submit a certification of AML program effectiveness to their regulator within 180 days of licensure and annually thereafter — a formal attestation requirement that goes beyond simply having policies on paper.</p>
+              <p><strong>4. Sanctions Compliance — Now Mandatory by Law</strong></p>
+              <p>Issuers must maintain effective economic sanctions compliance programs, including the verification of sanctions lists— and must maintain the technical capability to comply with lawful orders to block, seize, freeze, burn, or prevent the transfer of outstanding stablecoins.</p>
+              <p>This is the first time that sanctions compliance programs have been mandated by law for stablecoin issuers. The ability to freeze or burn tokens on-chain isn't just a product feature — it's now a regulatory requirement.</p>
+              <p><strong>5. Prohibition on Convicted Financial Criminals</strong></p>
+              <p>The Act prohibits anyone convicted of certain financial crimes from serving as an officer or director of a stablecoin issuer. This is the provision that should have existed in fintech generally and for years didn't. It's a governance floor, not a ceiling.</p>
+              <h3>What the GENIUS Act Still Leaves Open</h3>
+              <p>The Act is historic, but it's not complete. Several critical questions remain unresolved — and these are the questions that compliance teams building on stablecoin rails need to track carefully.</p>
+              <p><strong>Unhosted wallets and peer-to-peer transfers:</strong> Nothing in the GENIUS Act addresses the treatment of unhosted wallets and peer-to-peer transfers for payment purposes, or the duty of virtual asset service providers to comply with the travel rule in respect of transfers to or from unhosted wallets. This is a significant gap. The travel rule — which requires financial institutions to pass identifying information along with transactions above certain thresholds — is a core BSA obligation, and its application to wallet-to-wallet transfers on public blockchains is still unresolved.</p>
+              <p><strong>FinCEN's tailored AML rules:</strong> The Act requires FinCEN to write rules tailored to the size and complexity of stablecoin issuers — but those rules are still being developed. On April 3, 2026, the Treasury Department issued a Notice of Proposed Rulemaking setting forth broad-based principles for determining whether a state-level regulatory regime is substantially similar to the federal framework. We're still in the comment and rulemaking period. The final rules will matter enormously for how compliance programs are structured in practice.</p>
+              <p><strong>Foreign issuers:</strong> The Act includes AML and sanctions compliance provisions that require foreign issuers to meet AML and sanctions compliance requirements before issuing payment stablecoins to holders in the United States. The extraterritorial reach of the GENIUS Act — and what “substantially similar” compliance looks like for a non-U.S. issuer — is an open question with significant implications for cross-border stablecoin platforms operating in corridors like U.S.-Mexico, where multiple regulatory regimes intersect.</p>
+              <h3>What This Means for Businesses Using Stablecoin Rails</h3>
+              <p>If you're a business evaluating stablecoin payment infrastructure — whether for cross-border supplier payments, payroll, or treasury management — the GENIUS Act changes the risk calculus significantly.</p>
+              <p><strong>The upside:</strong> The regulatory clarity you've been waiting for has arrived. Payment stablecoins are not securities. The reserve requirements, reporting standards, and compliance obligations are defined. Banking partners who were hesitant to work with stablecoin platforms now have a federal framework to point to when their own regulators ask questions. The institutional adoption that's been building — Visa settling on USDC, Nubank embedding stablecoins for 127 million customers — accelerates under clear rules.</p>
+              <p><strong>The due diligence question:</strong> Not all stablecoin platforms are GENIUS Act compliant. The Act creates a licensed issuer framework — which means the question to ask any stablecoin provider is simple: are you a Permitted Payment Stablecoin Issuer, or are you building toward that status? What does your reserve backing look like? Who is your designated compliance officer? When was your AML program last certified?</p>
+              <p>If a stablecoin platform can't answer those questions clearly, the GENIUS Act has effectively made that platform a compliance liability for the businesses using it.</p>
+              <h3>How Scurry Is Built for This Environment</h3>
+              <p>We registered Scurry as a Money Services Business with FinCEN before we acquired our first user. Our AML program, KYC framework, and sanctions screening were operational before our product launched. We designated a compliance officer — that's Eric Kinney, thirty years as a BSA Officer and Certified Fraud Examiner, DOJ witness in a major fintech fraud case — before we built anything else.</p>
+              <p>The GENIUS Act didn't change how we build. It validated why we built this way from the start.</p>
+              <p>The compliance requirements the Act mandates — 1:1 reserves, monthly reporting, full BSA treatment, sanctions program, designated compliance officer — are not new burdens for Scurry. They are descriptions of infrastructure we already have.</p>
+              <p>For the businesses and banking partners evaluating stablecoin platforms in this new regulatory environment: that's the difference that matters. Not who moves fastest. Who built it right.</p>
+              <p>The window to build compliant stablecoin infrastructure for emerging markets is open. The regulatory framework has arrived. The question now is which platforms can operate within it — and which ones are still catching up.</p>
+              <p>Build right. Move far.</p>
+              <p>A note on what comes next: Scurry is pursuing a National Bank charter with the Office of the Comptroller of the Currency. We'll have more to share on that milestone when the time is right. If you're a banking partner, institutional investor, or regulator interested in what we're building — we'd like to talk. Reach us at scurry.us.</p>
+            </div>
+          </div>
+          <button class="blog-toggle" type="button" data-read-more="{{blog.read_more}}" data-show-less="{{blog.show_less}}">{{blog.read_more}}</button>
+        </article>
+
+        <article class="blog-entry reveal delay-1" data-blog-entry>
+          <header class="blog-entry-header">
+            <p class="blog-meta"><time datetime="2026-08">August 2026</time> · Eric Kinney</p>
             <h2>Argentina, Inflation, and Why Stablecoins Aren't Crypto to The Hustlers</h2>
           </header>
           <div class="blog-body">
