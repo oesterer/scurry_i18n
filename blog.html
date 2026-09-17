@@ -47,6 +47,62 @@
         <article class="blog-entry reveal" data-blog-entry>
           <header class="blog-entry-header">
             <p class="blog-meta"><time datetime="2026-09">September 2026</time> · Eric Kinney</p>
+            <h2>5 Questions Every Business Should Ask Before Choosing a Stablecoin Payment Provider</h2>
+          </header>
+          <div class="blog-body">
+            <p>The stablecoin payment market crossed $1 billion in monthly transaction volume in July 2026. Visa has more than 160 stablecoin-linked card programs live or in development. The GENIUS Act has established the first federal framework for payment stablecoins in U.S. history.</p>
+            <div class="blog-extra" hidden>
+              <p>The infrastructure is proven. The regulatory framework is arriving. And a growing number of businesses — paying suppliers in Mexico, managing cross-border payroll, protecting treasury value in high-inflation markets — are evaluating stablecoin payment providers for the first time.</p>
+              <p>Most of them are asking the wrong questions.</p>
+              <p>“What are your fees?” is a reasonable question. “How fast do you settle?” is a reasonable question. But neither of them tells you whether the platform you're considering will still be operating in two years, whether your banking partners will accept transactions from it, or whether you'll face regulatory exposure by using it.</p>
+              <p>After thirty years as a Bank Secrecy Act Officer and Certified Fraud Examiner — building compliance programs at four Silicon Valley fintechs, filing the SAR that triggered a DOJ investigation, and testifying as a federal witness in the resulting case — here are the five questions I'd ask before putting my business's treasury on any stablecoin platform.</p>
+              <h3>1. Are You a Registered Money Services Business with FinCEN?</h3>
+              <p>This is the baseline. Any stablecoin platform operating in the United States that transmits money — including USDC or USDT — is legally required to register as a Money Services Business with the Financial Crimes Enforcement Network.</p>
+              <p>Registration does not guarantee a good compliance program. But the absence of registration tells you something important: the platform is either unaware of its legal obligations or has chosen not to meet them. Neither is a foundation you want to build your cross-border payment infrastructure on.</p>
+              <p>Ask for the FinCEN registration number. Verify it at fincen.gov. If the platform can't or won't provide it, that's your answer.</p>
+              <p><strong>What to look for beyond registration:</strong> Does the platform have a designated compliance officer? Has it been examined by a regulator or banking partner? Can it describe its AML program in plain language? Registration is the floor. These are the walls.</p>
+              <h3>2. What Does Your KYC and AML Program Actually Look Like?</h3>
+              <p>“We're fully compliant” is a marketing statement. It is not a compliance program.</p>
+              <p>A genuine KYC and AML program for a stablecoin platform includes: a written Customer Identification Program that specifies how customer identity is verified at onboarding; ongoing transaction monitoring that flags unusual patterns in real time, not just at the end of a batch cycle; sanctions screening at both the customer level and the wallet address level; a Suspicious Activity Report filing program with a designated officer responsible for filing decisions; and regular independent testing of the program's effectiveness.</p>
+              <p>The GENIUS Act now requires stablecoin issuers to submit a certification of AML program effectiveness to their regulator within 180 days of licensure and annually thereafter. This is not a paper exercise — it is a legal certification that requires the program to actually work.</p>
+              <p>Ask your potential provider: when was your AML program last independently tested? Who is your designated compliance officer? What blockchain analytics tools do you use for wallet screening? Can you show me your transaction monitoring configuration?</p>
+              <p>A platform that cannot answer these questions in specific terms does not have a program worth relying on.</p>
+              <p><strong>The LATAM-specific dimension:</strong> if you're using a stablecoin platform for the U.S.-Mexico corridor or broader LATAM, your provider's KYC program needs to handle customers who may have a national ID and a smartphone but not a U.S. bank account or a Social Security number. A compliance program designed only for U.S.-banked customers will fail your users at the onboarding stage.</p>
+              <h3>3. Are You Pursuing or Do You Hold a National Bank Charter or State Money Transmitter Licenses?</h3>
+              <p>FinCEN registration is the federal baseline. Money transmitter licenses at the state level are the next layer — and they matter enormously for your banking relationships.</p>
+              <p>Most U.S. banks will not work with a stablecoin platform that does not hold money transmitter licenses in the states where it operates. This is not a legal requirement on the bank's side. It is a risk management decision that determines whether your platform can maintain the banking relationships that make it function. A stablecoin platform without banking partners is a platform that cannot hold reserves, cannot settle in fiat, and cannot operate at scale.</p>
+              <p>RedotPay — currently the largest stablecoin card platform by volume — only began filing for U.S. money transmitter licenses in 2026. A national bank charter goes further: it provides direct access to the Federal Reserve payment system, FDIC insurance eligibility for customer deposits, and the institutional credibility that makes tier-one banking partnerships possible.</p>
+              <p>Ask your potential provider: which states do you hold money transmitter licenses in? Are you pursuing a federal charter? Who are your banking partners, and how long have those relationships been in place?</p>
+              <p>A platform that has been operating for years without state licensing is a platform that has been operating in a gray zone — and gray zones have a way of resolving badly when regulators catch up.</p>
+              <h3>4. What Happens When Something Goes Wrong?</h3>
+              <p>Every payment platform will eventually process a transaction that needs to be investigated, reversed, or escalated. The question is not whether problems occur. It's whether the platform has the infrastructure to resolve them.</p>
+              <p>For businesses using stablecoin platforms for cross-border payments, the critical scenarios are:</p>
+              <p><strong>A fraudulent transaction:</strong> can the platform freeze funds before they are withdrawn? The GENIUS Act now requires stablecoin issuers to maintain the technical capability to freeze or burn tokens on-chain in response to lawful orders. This is not just a regulatory requirement — it is the feature that protects your business when your account is compromised.</p>
+              <p><strong>A disputed payment:</strong> does the platform have a dispute resolution process with defined timelines and outcomes? Or does resolution require navigating a ticket system with no accountability?</p>
+              <p><strong>A regulatory inquiry:</strong> if a regulator or law enforcement agency sends a subpoena or inquiry related to transactions on your account, what is the platform's process? Who handles it? How long does resolution take?</p>
+              <p><strong>A banking partner change:</strong> if the platform's banking partner terminates the relationship — which happens more frequently in this space than most businesses realize — what happens to your funds? What is the continuity plan?</p>
+              <p>Ask for the platform's incident response policy in writing. Ask about their historical uptime. Ask how many banking partners they maintain and what their contingency plan is if one exits. The answers will tell you whether this is a platform built for operational resilience or one that has not thought past growth.</p>
+              <h3>5. Can You Show Me Your Reserve Proof?</h3>
+              <p>The GENIUS Act now requires stablecoin issuers to maintain 1:1 reserve backing for every token issued — dollar-backed stablecoins must be backed by an equivalent dollar of high-quality liquid assets — and to publish monthly reports on reserve composition with CEO and CFO certifications.</p>
+              <p>Before the GENIUS Act, reserve transparency was voluntary and inconsistently practiced. Several high-profile stablecoin collapses — most notably TerraUSD in 2022 — resulted from inadequate or fraudulent reserve structures. The GENIUS Act's mandatory reserve attestation requirement exists specifically because the market demonstrated it could not police reserve integrity on its own.</p>
+              <p>For any stablecoin platform you consider for business payments, ask: what is the reserve backing for the stablecoin I'll be holding? Who is the issuer? Are monthly reserve attestations publicly available? Has the reserve structure been independently audited?</p>
+              <p>USDC, issued by Circle and backed 1:1 by cash and short-term U.S. Treasuries with monthly independent attestations, is the institutional-grade standard. Any stablecoin that cannot point to an equivalent level of reserve transparency is carrying risk that it is not disclosing.</p>
+              <h3>A Note on What These Questions Reveal</h3>
+              <p>A stablecoin payment provider that can answer all five of these questions specifically, with documentation, in under fifteen minutes is a provider that has built compliance infrastructure as a foundation rather than an afterthought. That foundation is what allows it to maintain banking relationships, operate in regulated corridors, and serve your business reliably as the regulatory environment continues to evolve.</p>
+              <p>A provider that struggles with these questions — that gives vague answers, defers to marketing language, or suggests that compliance is “in progress” — is a provider that has prioritized speed over durability. That trade-off is fine for a crypto trading platform. For a business managing real cross-border payment flows, it is a meaningful risk.</p>
+              <h3>How Scurry Answers These Questions</h3>
+              <p>We ask ourselves these questions every day.</p>
+              <p>FinCEN-registered MSB — yes, operational before our first user. AML program — written, tested, with a 30-year BSA Officer as designated compliance officer. Banking partners — in place. KYC framework — designed specifically for the emerging market user. National Bank charter — OCC pre-application meeting completed, formal application in process. Reserve backing — USDC, with Circle's monthly independent attestations. Dispute resolution — defined, documented, and building.</p>
+              <p>We are not the cheapest option in the U.S.-Mexico remittance corridor. We are not the fastest to market.</p>
+              <p>We are building this right — because the businesses and communities we're serving have been failed enough times by platforms that didn't.</p>
+            </div>
+          </div>
+          <button class="blog-toggle" type="button" data-read-more="{{blog.read_more}}" data-show-less="{{blog.show_less}}">{{blog.read_more}}</button>
+        </article>
+
+        <article class="blog-entry reveal delay-1" data-blog-entry>
+          <header class="blog-entry-header">
+            <p class="blog-meta"><time datetime="2026-09">September 2026</time> · Eric Kinney</p>
             <h2>The $50 Billion Stablecoin Card Market: What It Means for LATAM</h2>
           </header>
           <div class="blog-body">
