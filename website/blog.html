@@ -53,6 +53,55 @@
         <article class="blog-entry reveal" data-blog-entry>
           <header class="blog-entry-header">
             <p class="blog-meta"><time datetime="2026-10">October 2026</time> · Eric Kinney</p>
+            <h2>Why We're Not Afraid of AI Agents — And the Incumbents Are</h2>
+          </header>
+          <div class="blog-body">
+            <p>This week at Money20/20 in Las Vegas, PNC's CEO told the audience that AI agent-only financial transactions “will never happen.” Citi and Bank of America announced restrictions on AI agents accessing customer accounts. The consensus among incumbent financial institutions is forming quickly: AI agents are a threat to be blocked, not a capability to be built around.</p>
+            <div class="blog-extra" hidden>
+              <p>We disagree. Not because we think the fraud risks aren't real — they are — but because we think blocking is the wrong answer to a solvable engineering problem.</p>
+              <p>This post is about why we're not afraid of AI agents, what we built instead of a block, and what it means for the businesses that will run their payment operations on Scurry's infrastructure.</p>
+              <h3>What the Incumbents Are Actually Afraid Of</h3>
+              <p>The PNC CEO's concerns at Money20/20 were specific and worth taking seriously:</p>
+              <p><strong>Fraud.</strong> An AI agent that can initiate financial transactions autonomously is a new attack surface. Business email compromise — where an attacker impersonates a vendor or executive to redirect a payment — is already the highest-dollar fraud category in commercial banking. An AI agent that can authorize wire transfers without human review doesn't solve that problem. It accelerates it.</p>
+              <p><strong>Liability.</strong> Who is responsible when an AI agent sends money to the wrong place? The bank? The technology company whose agent initiated the transaction? The customer who authorized the agent? These questions don't have legal answers yet, and financial institutions that move before they do take on undefined exposure.</p>
+              <p><strong>Deposit flight.</strong> If an AI agent can optimize a customer's cash management across institutions in real time — sweeping balances, chasing yield, moving money frictionlessly — the stable deposit base that traditional financial institutions depend on becomes unstable overnight. This is the existential fear underneath the fraud concerns.</p>
+              <p>These are legitimate concerns. They are also, notably, concerns that apply specifically to institutions that didn't design their compliance and operational infrastructure with AI agents in mind.</p>
+              <p>That is not Scurry's situation.</p>
+              <h3>What We Built Instead of a Block</h3>
+              <p>Scurry's AI compliance agent is named Murry. He is not a general-purpose AI assistant layered on top of a payment system. He is a compliance-first agent whose architecture was designed around the specific fraud risks of AI-initiated financial transactions.</p>
+              <p>Three hardcoded controls that cannot be overridden by any user, at any permission level:</p>
+              <p><strong>Wire transfers above threshold always require dual human approval.</strong> This is not a configurable setting. There is no user role that removes it. The reason: business email compromise requires a single point of authorization failure. Dual approval eliminates that single point. Murry can prepare, stage, and route a wire transfer. He cannot execute one alone.</p>
+              <p><strong>First invoices from new vendors always go to human review.</strong> Every first invoice from every new vendor, without exception, is flagged for human review before Murry touches it. Fictitious vendor fraud — the creation of fake or compromised vendor accounts to intercept payments — depends on the first payment going through without scrutiny. This control closes that window structurally.</p>
+              <p><strong>Banking detail changes on existing vendors within 30 days of a scheduled payment are automatically held.</strong> This is the specific timing window that fraud rings exploit: compromise a vendor relationship, change the banking details, time the change to coincide with an expected payment. The 30-day hold closes that timing attack. It does not require anyone to notice the change in real time. The system holds it regardless.</p>
+              <p>These controls are hardcoded rather than configurable because configurable compliance controls are not compliance controls — they are suggestions. Every control that can be disabled will eventually be disabled. The value of a hardcoded control is precisely that it cannot be rationalized away under time pressure.</p>
+              <h3>The Liability Question Has a Structural Answer</h3>
+              <p>The PNC CEO is right that liability for AI-initiated transactions is unresolved. His solution is to keep humans in the loop at every transaction. Ours is to define precisely which decisions require human judgment and make that boundary structural rather than procedural.</p>
+              <p>Murry does not make final compliance determinations on flagged transactions. He identifies, routes, escalates, and documents. The human review that Murry triggers is real human review — not a rubber stamp — and the documentation of that review is part of Scurry's BSA program record. When an AI agent's decision is later questioned, the audit trail shows exactly what Murry flagged, who reviewed it, what they decided, and when.</p>
+              <p>That is the answer to the liability question: not “a human was theoretically available” but “here is the documented decision and the human who made it.”</p>
+              <h3>The Deposit Flight Question Is a Different Product Category</h3>
+              <p>The incumbent concern about deposit flight — that AI agents will optimize cash management across institutions in real time and destabilize the deposit base — is a legitimate concern for retail and institutional banks whose business model depends on sticky deposits.</p>
+              <p>It is not a concern that applies to Scurry's infrastructure in the same way.</p>
+              <p>Scurry is building payment infrastructure for businesses operating across the U.S.-Mexico corridor: cross-border supplier payments, multi-currency treasury management, working capital flows for operators on both sides of the border. The businesses using Scurry's rails are not optimizing for yield on idle deposits. They are solving a specific operational problem: moving money across the U.S.-Mexico border compliantly, reliably, and at a fraction of the current cost.</p>
+              <p>The AI agent question for our customers is not “how do I sweep my balance to maximize yield tonight?” It is “how do I pay my Mexican supplier on Friday when the wire cutoff is Thursday afternoon and my CFO is traveling?” Murry is built to answer that question, with the compliance controls that make the answer trustworthy.</p>
+              <h3>Why Being Compliance-First Makes This Possible</h3>
+              <p>The incumbents blocking AI agents are not blocking them because AI agents are inherently unsafe. They are blocking them because their compliance infrastructure was not designed to accommodate AI agents safely, and retrofitting that infrastructure while the business keeps running is expensive, slow, and uncertain.</p>
+              <p>Scurry is FinCEN-registered, with a BSA program that was operational before our first user. We are pursuing an OCC National Bank charter — the highest regulatory standard available to a U.S. financial institution. Our founding team includes thirty years of BSA Officer experience and an engineer who builds systems that cannot fail quietly.</p>
+              <p>We didn't build Murry and then figure out how to make him compliant. We built the compliance architecture and then built Murry inside it.</p>
+              <p>That's why the PNC CEO's warning — that anyone who lets AI agents transact without the right controls will be defrauded — describes every institution that built it the wrong way. It doesn't describe what's possible when you build it right from the beginning.</p>
+              <h3>What This Means for Businesses Evaluating AI-Native Payment Infrastructure</h3>
+              <p>If you are a business evaluating payment infrastructure for cross-border operations and you are asking whether AI agents can be part of that infrastructure safely — the answer is yes, with the right architecture.</p>
+              <p>The question to ask any platform offering AI-assisted payment operations is the same question to ask any compliance program: show me this actually works. Show me the controls that prevent a fraudulent wire from going through. Show me the audit trail that documents who approved what and when. Show me the architecture that makes the AI agent safe to deploy, rather than the terms of service that shift liability if it isn't.</p>
+              <p>We are closing our pre-seed round before Thanksgiving. We are building the compliance-first payment infrastructure that makes AI agents safe rather than dangerous — and we are doing it in the corridor where the need is most immediate.</p>
+              <p>Build right. Move far.</p>
+              <p>Sources: PNC CEO Bill Demchak, Money20/20 Las Vegas (October 2026); Banking Dive; Citi and BofA AI agent restrictions.</p>
+            </div>
+          </div>
+          <button class="blog-toggle" type="button" data-read-more="Read more" data-show-less="Show less">Read more</button>
+        </article>
+
+        <article class="blog-entry reveal delay-1" data-blog-entry>
+          <header class="blog-entry-header">
+            <p class="blog-meta"><time datetime="2026-10">October 2026</time> · Eric Kinney</p>
             <h2>What Our CTO Found in Mexico City: The Market Is Ready</h2>
           </header>
           <div class="blog-body">
