@@ -1507,8 +1507,19 @@ h4 {
 }
 
 .blog-toggle:hover,
-.blog-toggle:focus-visible {
+.blog-toggle:focus-visible,
+.blog-post-link:hover,
+.blog-post-link:focus-visible {
   color: #075ba4;
+}
+
+.blog-post-link {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(25, 173, 252, 0.4);
+  color: var(--accent-deep);
+  font-weight: 800;
+  padding-bottom: 3px;
 }
 
 /* Blog hero image */
