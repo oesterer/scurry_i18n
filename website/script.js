@@ -64,6 +64,33 @@
     toggle.setAttribute('aria-expanded', 'false');
   });
 
+  function expandLinkedBlogEntry() {
+    if (!window.location.hash) {
+      return;
+    }
+
+    const entry = document.querySelector(window.location.hash);
+
+    if (!entry || !entry.matches('[data-blog-entry]')) {
+      return;
+    }
+
+    const toggle = entry.querySelector('.blog-toggle');
+    const extra = entry.querySelector('.blog-extra');
+
+    if (!toggle || !extra) {
+      return;
+    }
+
+    entry.classList.add('is-expanded');
+    extra.hidden = false;
+    toggle.textContent = toggle.dataset.showLess;
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  expandLinkedBlogEntry();
+  window.addEventListener('hashchange', expandLinkedBlogEntry);
+
     const faqSearch = document.querySelector('#faq-search');
     const faqGroups = Array.from(document.querySelectorAll('[data-faq-group]'));
     const noResults = document.querySelector('.faq-no-results');
