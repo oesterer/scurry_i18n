@@ -36,6 +36,12 @@ ATTR_RE = re.compile(
 )
 TAG_NAME_RE = re.compile(r"^<\s*/?\s*([A-Za-z0-9:-]+)")
 META_NAME_RE = re.compile(r"""name\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
+BLOG_ENTRY_RE = re.compile(
+    r"<article\b(?=[^>]*\bdata-blog-entry\b)(?P<attrs>[^>]*)>",
+    re.IGNORECASE,
+)
+ID_ATTR_RE = re.compile(r"""\bid\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
+BLOG_SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
 
 def slugify(value):
@@ -541,7 +547,28 @@ def clean_website_output(locales):
             shutil.rmtree(locale_dir)
 
 
+def validate_blog_entry_ids():
+    blog_path = ROOT / "blog.html"
+    if not blog_path.exists():
+        return
+
+    slugs = []
+    for index, match in enumerate(BLOG_ENTRY_RE.finditer(blog_path.read_text(encoding="utf-8")), 1):
+        id_match = ID_ATTR_RE.search(match.group("attrs"))
+        if not id_match:
+            raise SystemExit(f"Blog entry {index} is missing a direct-link id.")
+        slug = id_match.group(1)
+        if not BLOG_SLUG_RE.fullmatch(slug):
+            raise SystemExit(f"Blog entry id is not an SEO-friendly slug: {slug}")
+        slugs.append(slug)
+
+    duplicates = sorted({slug for slug in slugs if slugs.count(slug) > 1})
+    if duplicates:
+        raise SystemExit(f"Duplicate blog entry ids: {', '.join(duplicates)}")
+
+
 def build():
+    validate_blog_entry_ids()
     translations = load_translations()
     locales = generate_locale_files(translations)
     clean_website_output(locales)

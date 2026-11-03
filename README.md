@@ -103,6 +103,16 @@ Alternate links use relative URLs by default. To generate absolute URLs, set `SI
 SITE_BASE_URL="https://example.com" python3 i18n.py build
 ```
 
+### Blog Article Links
+
+Every blog entry must have a stable, title-derived `id` on its `article` element so it can be linked directly:
+
+```html
+<article id="example-article-title" data-blog-entry>
+```
+
+Create the slug by lowercasing the title, removing apostrophes and other punctuation, and joining words with hyphens. Direct links use `blog.html#example-article-title`. The blog script expands the selected article automatically. Keep existing slugs unchanged when editing titles so published links remain stable.
+
 ### Extract New English Text
 
 ```sh

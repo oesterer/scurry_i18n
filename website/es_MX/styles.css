@@ -1376,6 +1376,7 @@ h4 {
 
 .blog-entry {
   padding: 34px;
+  scroll-margin-top: calc(var(--nav) + 20px);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: #fff;
